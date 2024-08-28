@@ -1,0 +1,67 @@
+<style type="text/css">
+    .card {
+        max-width: 700px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    /* Add a new class to style the row */
+    .post-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+</style>
+
+{% if blog_post %}
+    <div class="container">
+        <!-- Add the new class to the row div -->
+        <div class="row post-row">
+
+            <!-- blog post 1 -->
+            <div class="card">
+                <a href="{% url 'blog:detail' post.slug %}">
+                    <img src="{{blog_post.image.url}}" alt="" class="card-img-top">
+                </a>
+
+                <div class="card-body mt-2 mb-2">
+                    <a href="{% url 'blog:detail' post.slug %}">
+                        <h2 class="card-title">{{blog_post.title}}</h2>
+                    </a>
+                    <p class="card-text">{{blog_post.body|safe|truncatechars:250}}
+                        <a href="{% url 'blog:detail' blog_post.slug %}" class="btn btn-primary">Read more &#x2192; </a>
+                    </p>
+
+                    {% if blog_post.author == request.user %}
+                        <a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary">Update</a>
+                    {% endif %}
+                </div>
+                <div class="card-footer text-muted">
+                    Updated on {{blog_post.date_updated}} By {{blog_post.author}}
+                </div>
+            </div>
+
+            <!-- Repeat the above block for blog post 2 and 3 -->
+
+        </div>
+    </div>
+{% else %}
+    <div class="container">
+        <div class="row">
+            <div class="card m-auto">
+                <div class="card-body m mb-2">
+                    <h2 class="card-title">
+                        No results
+                    </h2>
+                    <p class="card-text">
+                        There is no result matching your search for <strong>"{{query}}"</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

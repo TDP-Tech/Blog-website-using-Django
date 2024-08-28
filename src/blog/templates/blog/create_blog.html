@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+    .create-form{
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
+        margin: auto;
+    }
+    .submit-button{
+        max-width: 200px;
+    }
+</style>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7 offset-lg-1">
+            <form action="" class="create-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- title -->
+                <div class="form-group">
+                    <label for="id_title">Title</label>
+                    <input type="text" name="title" id="id_title" class="form-control" placeholder="your Title here" required autofocus>
+                </div>
+
+                <!-- body -->
+                <div class="form-group">
+                    <label for="id_body">Content</label>
+                    <textarea class="form-control" type="text" name="body" id="id_body" placeholder="Write your content here...." rows="10" required></textarea>
+                </div>
+
+                <!-- image -->
+                <div class="form-group">
+                    <label for="id_image">Image</label>
+                    <input type="file" name="image" id="id_image" accept="image/" required>
+                </div>
+
+                <!-- submit button  -->
+                <button type="submit" class="submit-button btn btn-lg btn-primary btn-block">POST</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %} 
+
